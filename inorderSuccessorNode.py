@@ -67,3 +67,5 @@ if __name__ == '__main__':
 	print('[%d]:[%d]'%(test.value,getSuccessorNode(test).value))
 	test = head.rchild.rchild
 	print('[%d]:%s'%(test.value,getSuccessorNode(test)))
+
+	
