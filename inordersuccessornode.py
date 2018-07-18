@@ -1,98 +1,69 @@
 class Node:
 	def __init__(self,val):
-		self.val = val
 		self.lchild = None
 		self.rchild = None
+		self.value = val
+		self.parent = None
 
 
-#recursive 递归
-def preorderRecur(root):
-	if root == None:
-		return 
-	print(root.val,end=' ')
-	preorderRecur(root.lchild)
-	preorderRecur(root.rchild)
+def getSuccessorNode(head):
+	'''中序时后继节点'''
+	if head == None:
+		return None
+	if head.rchild != None:
+		return getlchildMose(head.rchild)
+	else:
+		parent = head.parent
+		while parent != None and parent.lchild != head:
+			head = parent
+			parent = head.parent
+		return parent
 
-def inorderRecur(root):
-	if root == None:
-		return 
-	inorderRecur(root.lchild)
-	print(root.val,end=' ')
-	inorderRecur(root.rchild)
-
-def postorderRecur(root):
-	if root == None:
-		return 
-	postorderRecur(root.lchild)
-	postorderRecur(root.rchild)
-	print(root.val,end=' ')
-
-#unrecrsive 非递归
-def preorderUnRecur(root):
-	if root == None:
-		return
-	lists = []
-	lists.append(root)
-	while(len(lists) != 0):
-		root = lists.pop()
-		print(root.val,end=' ')
-		if root.rchild != None:
-			lists.append(root.rchild)
-		#break
-		if root.lchild != None:
-			lists.append(root.lchild)
-
-def inorderUnRecur(root):
-	if root == None:
-		return
-	lists = []
-	while root != None or len(lists):
-		if root != None:
-			lists.append(root)
-			root = root.lchild
-		else:
-			root = lists.pop()
-			print(root.val,end=' ')
-			root = root.rchild
-
-def posterUnRecur(root):
-	if root == None:
-		return
-	lists = []
-	list2 = []
-	lists.append(root)
-	while len(lists):
-		root = lists.pop()
-		list2.append(root)
-		if root.lchild != None:
-			lists.append(root.lchild)
-		if root.rchild != None:
-			lists.append(root.rchild)
-	while len(list2):
-		print(list2.pop().val,end=' ')
+def getlchildMose(head):
+	if head == None:
+		return head
+	while head.lchild != None:
+		head = head.lchild
+	return head
 
 if __name__ == '__main__':
-	head = Node(5)
-	head.lchild = Node(3)
-	head.rchild = Node(8)
-	head.lchild.lchild = Node(2)
-	head.lchild.rchild = Node(4)
-	head.lchild.lchild.lchild = Node(1)
-	head.rchild.lchild = Node(7)
-	head.rchild.lchild.lchild = Node(6)
-	head.rchild.rchild = Node(10)
-	head.rchild.rchild.lchild = Node(9)
-	head.rchild.rchild.rchild = Node(11)
-
-	preorderRecur(head)
-	print('')
-	inorderRecur(head)
-	print('')
-	postorderRecur(head)
-	print('')
-	preorderUnRecur(head)
-	print('')
-	inorderUnRecur(head)
-	print('')
-	posterUnRecur(head)
-	print('')
+	head =Node(6)
+	head.parent = None
+	head.lchild =Node(3)
+	head.lchild.parent = head
+	head.lchild.lchild =Node(1)
+	head.lchild.lchild.parent = head.lchild
+	head.lchild.lchild.rchild =Node(2)
+	head.lchild.lchild.rchild.parent = head.lchild.lchild
+	head.lchild.rchild =Node(4)
+	head.lchild.rchild.parent = head.lchild
+	head.lchild.rchild.rchild =Node(5)
+	head.lchild.rchild.rchild.parent = head.lchild.rchild
+	head.rchild =Node(9)
+	head.rchild.parent = head
+	head.rchild.lchild =Node(8)
+	head.rchild.lchild.parent = head.rchild
+	head.rchild.lchild.lchild =Node(7)
+	head.rchild.lchild.lchild.parent = head.rchild.lchild
+	head.rchild.rchild =Node(10)
+	head.rchild.rchild.parent = head.rchild	
+	test = head.lchild.lchild
+	print('[%d]:[%d]'%(test.value,getSuccessorNode(test).value))
+	test = head.lchild.lchild.rchild
+	print('[%d]:[%d]'%(test.value,getSuccessorNode(test).value))
+	test = head.lchild
+	print('[%d]:[%d]'%(test.value,getSuccessorNode(test).value))
+	test = head.lchild.rchild
+	print('[%d]:[%d]'%(test.value,getSuccessorNode(test).value))
+	test = head.lchild.rchild.rchild
+	print('[%d]:[%d]'%(test.value,getSuccessorNode(test).value))
+	test = head
+	print('[%d]:[%d]'%(test.value,getSuccessorNode(test).value))
+	test = head.rchild.lchild.lchild
+	print('[%d]:[%d]'%(test.value,getSuccessorNode(test).value))
+	test = head.rchild.lchild
+	print('[%d]:[%d]'%(test.value,getSuccessorNode(test).value))
+	test = head.rchild
+	print('[%d]:[%d]'%(test.value,getSuccessorNode(test).value))
+	test = head.rchild.rchild
+	print('[%d]:%s'%(test.value,getSuccessorNode(test)))
