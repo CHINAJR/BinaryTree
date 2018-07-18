@@ -3,6 +3,8 @@ class Node:
 		self.lchild = None
 		self.rchild = None
 		self.val = val 
+		
+		
 def nodeNum(head):
 	if head == None:
 		return 0 
