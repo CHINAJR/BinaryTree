@@ -31,4 +31,3 @@ if __name__ == '__main__':
 	head.rchild.lchild = Node(6)
 	res = getHeight(head)
 	print(res[0])
-	print(res[1])
