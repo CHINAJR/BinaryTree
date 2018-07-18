@@ -34,5 +34,4 @@ if __name__ == '__main__':
 	head.rchild.rchild = Node(10)
 	head.rchild.rchild.lchild = Node(9)
 	head.rchild.rchild.rchild = Node(11)
-
 	print(inorderUnrecur(head))
