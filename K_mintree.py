@@ -55,3 +55,5 @@ if __name__ == '__main__':
 					ptr.next = newnode
 					ptr = ptr.next
 	mintrees(head)
+
+	
